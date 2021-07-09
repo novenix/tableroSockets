@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
@@ -33,16 +31,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
         UserDetails user =
-                User.
-                        withUsername("user")
-                        .password("12345678")
+                User.withDefaultPasswordEncoder()
+                        .username("Nicolas")
+                        .password("password")
                         .roles("USER")
                         .build();
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(user);
-        return manager;
+        UserDetails seconduser =
+                User.withDefaultPasswordEncoder()
+                        .username("Benavidez")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+        InMemoryUserDetailsManager userpool = new InMemoryUserDetailsManager();
+        userpool.createUser(user);
+        userpool.createUser(seconduser);
+        return userpool;
     }
 }
