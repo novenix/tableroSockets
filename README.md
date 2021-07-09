@@ -1,2 +1,2 @@
 # tableroSockets
-[https://socketboardnicolas.herokuapp.com/hello]: https://socketboardnicolas.herokuapp.com/hello
+[https://socketboardnicolas.herokuapp.com]: https://socketboardnicolas.herokuapp.com
